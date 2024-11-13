@@ -12,30 +12,30 @@ set (PLMLIB_CONFIG_ENABLE_STANDALONE "@PLMLIB_CONFIG_ENABLE_STANDALONE@")
 set (PLMLIB_CONFIG_ENABLE_TEST "@PLMLIB_CONFIG_ENABLE_TEST@")
 
 set (PLASTIMATCH_INCLUDE_DIRS
-  "@CMAKE_SOURCE_DIR@/src/plastimatch"
-  "@CMAKE_SOURCE_DIR@/src/plastimatch/sys"
-  "@CMAKE_SOURCE_DIR@/src/plastimatch/base"
-  "@CMAKE_SOURCE_DIR@/src/plastimatch/util"
-  "@CMAKE_SOURCE_DIR@/libs"
-  "@CMAKE_SOURCE_DIR@/libs/devillard"
+  "@PLM_SOURCE_DIR@/src/plastimatch"
+  "@PLM_SOURCE_DIR@/src/plastimatch/sys"
+  "@PLM_SOURCE_DIR@/src/plastimatch/base"
+  "@PLM_SOURCE_DIR@/src/plastimatch/util"
+  "@PLM_SOURCE_DIR@/libs"
+  "@PLM_SOURCE_DIR@/libs/devillard"
   "@DLIB_INCLUDE_DIR@"
-  "@CMAKE_SOURCE_DIR@/libs/dlib-18.7"
+  "@PLM_SOURCE_DIR@/libs/dlib-18.7"
   "@CMAKE_BINARY_DIR@")
 if (PLMLIB_CONFIG_ENABLE_DOSE)
   set (PLASTIMATCH_INCLUDE_DIRS
     ${PLASTIMATCH_INCLUDE_DIRS}
-    "@CMAKE_SOURCE_DIR@/src/plastimatch/dose")
+    "@PLM_SOURCE_DIR@/src/plastimatch/dose")
 endif ()
 if (PLMLIB_CONFIG_ENABLE_REGISTER)
   set (PLASTIMATCH_INCLUDE_DIRS
     ${PLASTIMATCH_INCLUDE_DIRS}
-    "@CMAKE_SOURCE_DIR@/src/plastimatch/register"
-    "@CMAKE_SOURCE_DIR@/libs/liblbfgs-1.9/include")
+    "@PLM_SOURCE_DIR@/src/plastimatch/register"
+    "@PLM_SOURCE_DIR@/libs/liblbfgs-1.9/include")
 endif ()
 if (PLMLIB_CONFIG_ENABLE_SEGMENT)
   set (PLASTIMATCH_INCLUDE_DIRS
     ${PLASTIMATCH_INCLUDE_DIRS}
-    "@CMAKE_SOURCE_DIR@/src/plastimatch/segment")
+    "@PLM_SOURCE_DIR@/src/plastimatch/segment")
 endif ()
   
 set (PLASTIMATCH_ITK_DIR

@@ -262,7 +262,7 @@ if (SWIG_FOUND)
       OUTPUT_DIR "${CSHARP_OUTPUT_DIR}"
       OUTFILE_DIR "${CSHARP_OUTFILE_DIR}"
       SOURCES ${PLMBASE_SWIG_LIBRARY_SRC})
-    set_property (TARGET plmbase-cs PROPERTY SWIG_INCLUDE_DIRECTORIES "$<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/src/sys>")
+    set_property (TARGET plmbase-cs PROPERTY SWIG_INCLUDE_DIRECTORIES "$<BUILD_INTERFACE:${PLM_SOURCE_DIR}/src/sys>")
     target_link_libraries (plmbase-cs PUBLIC plmbase)
     if (TARGET DCMTK::dcmdata)
       target_link_libraries (plmbase-cs PUBLIC DCMTK::dcmdata)
@@ -284,7 +284,7 @@ if (SWIG_FOUND)
       OUTPUT_DIR "${PYTHON_OUTPUT_DIR}"
       OUTFILE_DIR "${PYTHON_OUTFILE_DIR}"
       SOURCES ${PLMBASE_SWIG_LIBRARY_SRC})
-    set_property (TARGET plmbase_py PROPERTY SWIG_INCLUDE_DIRECTORIES "$<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/src/sys>")
+    set_property (TARGET plmbase_py PROPERTY SWIG_INCLUDE_DIRECTORIES "$<BUILD_INTERFACE:${PLM_SOURCE_DIR}/src/sys>")
     target_include_directories (plmbase_py PUBLIC ${Python3_INCLUDE_DIRS})
     target_link_libraries (plmbase_py PUBLIC plmbase)
     if (TARGET DCMTK::dcmdata)

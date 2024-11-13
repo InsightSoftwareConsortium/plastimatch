@@ -80,7 +80,7 @@ if (PLM_CONFIG_BUILD_TEST_PROGRAMS)
     # Test executable -- matlab
     if (MATLAB_FOUND)
 	file (WRITE "${PLM_BINARY_DIR}/compile_mex_test.m"
-	    "mex \"${CMAKE_SOURCE_DIR}/mex_test.c\";exit;\n")
+	    "mex \"${PLM_SOURCE_DIR}/mex_test.c\";exit;\n")
 	file (WRITE "${PLM_BINARY_DIR}/mex_test.cmake"
 	    "EXECUTE_PROCESS (COMMAND ${MATLAB_EXE} -nosplash -nodesktop -nojvm
             -r compile_mex_test
@@ -90,7 +90,7 @@ if (PLM_CONFIG_BUILD_TEST_PROGRAMS)
 	add_custom_command (
 	    OUTPUT "${PLM_BINARY_DIR}/mex_test${MATLAB_MEXEXT}"
 	    COMMAND ${CMAKE_COMMAND} -P "${PLM_BINARY_DIR}/mex_test.cmake"
-	    DEPENDS "${CMAKE_SOURCE_DIR}/mex_test.c")
+	    DEPENDS "${PLM_SOURCE_DIR}/mex_test.c")
 	add_custom_target (mat_mex_test
 	    DEPENDS "${PLM_BINARY_DIR}/mex_test${MATLAB_MEXEXT}")
 	target_link_libraries (mex_test ${MATLAB_LIBRARIES})
@@ -102,8 +102,8 @@ if (PLM_CONFIG_BUILD_TEST_PROGRAMS)
 	    OUTPUT "${PLM_BINARY_DIR}/mex_test.mex"
 	    COMMAND ${OCTAVE_MKOCTFILE} --mex 
 	    -o "${PLM_BINARY_DIR}/mex_test.mex" 
-	    "${CMAKE_SOURCE_DIR}/mex_test.c"
-	    DEPENDS "${CMAKE_SOURCE_DIR}/mex_test.c")
+	    "${PLM_SOURCE_DIR}/mex_test.c"
+	    DEPENDS "${PLM_SOURCE_DIR}/mex_test.c")
 	add_custom_target (oct_mex_test
 	    DEPENDS "${PLM_BINARY_DIR}/mex_test.mex")
     endif ()

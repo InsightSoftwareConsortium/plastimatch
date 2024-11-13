@@ -133,7 +133,7 @@ if (SWIG_FOUND)
       OUTFILE_DIR "${CSHARP_OUTFILE_DIR}"
       SOURCES ${PLMUTIL_SWIG_LIBRARY_SRC})
     set_property (TARGET plmutil-cs PROPERTY SWIG_INCLUDE_DIRECTORIES 
-      "$<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/src/sys>;$<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/src/base>")
+      "$<BUILD_INTERFACE:${PLM_SOURCE_DIR}/src/sys>;$<BUILD_INTERFACE:${PLM_SOURCE_DIR}/src/base>")
     target_link_libraries (plmutil-cs PUBLIC plmutil)
     if (TARGET DCMTK::dcmdata)
       target_link_libraries (plmutil-cs PUBLIC DCMTK::dcmdata)
@@ -156,7 +156,7 @@ if (SWIG_FOUND)
       OUTFILE_DIR "${PYTHON_OUTFILE_DIR}"
       SOURCES ${PLMUTIL_SWIG_LIBRARY_SRC})
     set_property (TARGET plmutil_py PROPERTY SWIG_INCLUDE_DIRECTORIES
-      "$<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/src/sys>;$<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/src/base>")
+      "$<BUILD_INTERFACE:${PLM_SOURCE_DIR}/src/sys>;$<BUILD_INTERFACE:${PLM_SOURCE_DIR}/src/base>")
     target_include_directories (plmutil_py PUBLIC ${Python3_INCLUDE_DIRS})
     target_link_libraries (plmutil_py PUBLIC plmutil)
     if (TARGET DCMTK::dcmdata)

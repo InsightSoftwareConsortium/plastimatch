@@ -215,10 +215,10 @@ endif ()
 
 # ITK compatibility shims
 if (NOT HAVE_ITK_VECTOR_CD)
-  message (STATUS "Appending ${CMAKE_SOURCE_DIR}/libs/itk-5.1.0")
-  include_directories (AFTER "${CMAKE_SOURCE_DIR}/libs/itk-5.1.0")
+  message (STATUS "Appending ${PLM_SOURCE_DIR}/libs/itk-5.1.0")
+  include_directories (AFTER "${PLM_SOURCE_DIR}/libs/itk-5.1.0")
 else ()
-  message (STATUS "Not appending ${CMAKE_SOURCE_DIR}/libs/itk-5.1.0")
+  message (STATUS "Not appending ${PLM_SOURCE_DIR}/libs/itk-5.1.0")
 endif ()
 if (("${ITK_VERSION}" VERSION_LESS "4.13") OR (NOT ${PLM_PREFER_NEW_ITK_DEMONS}))
   set (PLM_USE_NEW_ITK_DEMONS OFF)
@@ -232,10 +232,10 @@ else ()
   include_directories (AFTER "${PLM_SOURCE_DIR}/libs/LogSymmetricDemons")
 endif ()
 if ("${ITK_VERSION}" VERSION_LESS "5")
-  message (STATUS "Appending ${CMAKE_SOURCE_DIR}/libs/itk-5.1.2")
+  message (STATUS "Appending ${PLM_SOURCE_DIR}/libs/itk-5.1.2")
   include_directories (BEFORE "${PLM_SOURCE_DIR}/libs/itk-5.1.2")
 else ()
-  message (STATUS "Not appending ${CMAKE_SOURCE_DIR}/libs/itk-5.1.2")
+  message (STATUS "Not appending ${PLM_SOURCE_DIR}/libs/itk-5.1.2")
 endif ()
 
 include_directories (AFTER ${PLM_SOURCE_DIR}/libs/nSIFT)
@@ -291,7 +291,7 @@ configure_file (${CMAKE_CURRENT_SOURCE_DIR}/sys/plm_version.h.in
 ##-----------------------------------------------------------------------------
 if (PLM_CONFIG_CLANG_COMPLETE)
   get_property(inc_dirs DIRECTORY PROPERTY INCLUDE_DIRECTORIES)
-  set (file_clang_complete "${CMAKE_SOURCE_DIR}/src/.clang_complete")
+  set (file_clang_complete "${PLM_SOURCE_DIR}/src/.clang_complete")
   foreach (arg ${inc_dirs})
     set (inc_args "${inc_args} -I${arg}\n")
   endforeach ()
@@ -357,58 +357,58 @@ list (APPEND PLASTIMATCH_INCLUDE_DIRECTORIES
   )
 list (APPEND PLASTIMATCH_INCLUDE_DIRECTORIES
   $<BUILD_INTERFACE:${PLM_BINARY_DIR}>
-  $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/src/sys>
-  $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/src/base>
-  $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/src/util>
-  $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/libs/devillard>
+  $<BUILD_INTERFACE:${PLM_SOURCE_DIR}/src/sys>
+  $<BUILD_INTERFACE:${PLM_SOURCE_DIR}/src/base>
+  $<BUILD_INTERFACE:${PLM_SOURCE_DIR}/src/util>
+  $<BUILD_INTERFACE:${PLM_SOURCE_DIR}/libs/devillard>
   $<BUILD_INTERFACE:${DLIB_INCLUDE_DIR}>
   )
 if (CUDA_FOUND)
   list (APPEND PLASTIMATCH_INCLUDE_DIRECTORIES
-    $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/src/cuda>
-    $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/src/util/cuda>
+    $<BUILD_INTERFACE:${PLM_SOURCE_DIR}/src/cuda>
+    $<BUILD_INTERFACE:${PLM_SOURCE_DIR}/src/util/cuda>
     )
 endif ()
 if (OPENCL_FOUND)
   list (APPEND PLASTIMATCH_INCLUDE_DIRECTORIES
-    $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/src/opencl>
+    $<BUILD_INTERFACE:${PLM_SOURCE_DIR}/src/opencl>
     )
 endif ()
 if (PLMLIB_CONFIG_ENABLE_REGISTER)
   list (APPEND PLASTIMATCH_INCLUDE_DIRECTORIES
-    $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/src/register>
-    $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/libs/liblbfgs-1.9/include>
+    $<BUILD_INTERFACE:${PLM_SOURCE_DIR}/src/register>
+    $<BUILD_INTERFACE:${PLM_SOURCE_DIR}/libs/liblbfgs-1.9/include>
     )
   if (CUDA_FOUND)
     list (APPEND PLASTIMATCH_INCLUDE_DIRECTORIES
-      $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/src/register/cuda>
+      $<BUILD_INTERFACE:${PLM_SOURCE_DIR}/src/register/cuda>
       )
   endif ()
 endif ()
 if (PLMLIB_CONFIG_ENABLE_SEGMENT)
   list (APPEND PLASTIMATCH_INCLUDE_DIRECTORIES
-    $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/src/segment>
+    $<BUILD_INTERFACE:${PLM_SOURCE_DIR}/src/segment>
     )
 endif ()
 if (PLMLIB_CONFIG_ENABLE_DOSE)
   list (APPEND PLASTIMATCH_INCLUDE_DIRECTORIES
-    $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/src/dose>
+    $<BUILD_INTERFACE:${PLM_SOURCE_DIR}/src/dose>
     )
 endif ()
 if (PLMLIB_CONFIG_ENABLE_RECONSTRUCT)
   list (APPEND PLASTIMATCH_INCLUDE_DIRECTORIES
-    $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/src/reconstruct>
+    $<BUILD_INTERFACE:${PLM_SOURCE_DIR}/src/reconstruct>
     )
   if (CUDA_FOUND)
     list (APPEND PLASTIMATCH_INCLUDE_DIRECTORIES
-      $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/src/reconstruct/cuda>
+      $<BUILD_INTERFACE:${PLM_SOURCE_DIR}/src/reconstruct/cuda>
       )
   endif ()
 endif ()
 
 if (NOT PLM_CONFIG_LIBRARY_BUILD)
   list (APPEND PLASTIMATCH_INCLUDE_DIRECTORIES
-    $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/src/clp>
+    $<BUILD_INTERFACE:${PLM_SOURCE_DIR}/src/clp>
     )
 endif ()
 

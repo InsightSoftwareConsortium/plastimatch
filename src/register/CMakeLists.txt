@@ -139,15 +139,15 @@ endif ()
 if (OPENMP_FOUND)
   set (PLMREGISTER_LIBRARY_LDFLAGS "${OPENMP_LDFLAGS}")
   set_source_files_properties (bspline.cxx
-    PROPERTIES COMPILE_FLAGS ${OPENMP_FLAGS})
+    PROPERTIES COMPILE_FLAGS ${OpenMP_CXX_FLAGS})
   set_source_files_properties (bspline_gm.cxx
-    PROPERTIES COMPILE_FLAGS ${OPENMP_FLAGS})
+    PROPERTIES COMPILE_FLAGS ${OpenMP_CXX_FLAGS})
   set_source_files_properties (bspline_mi.cxx
-    PROPERTIES COMPILE_FLAGS ${OPENMP_FLAGS})
+    PROPERTIES COMPILE_FLAGS ${OpenMP_CXX_FLAGS})
   set_source_files_properties (bspline_mse.cxx
-    PROPERTIES COMPILE_FLAGS ${OPENMP_FLAGS})
+    PROPERTIES COMPILE_FLAGS ${OpenMP_CXX_FLAGS})
   set_source_files_properties (bspline_regularize_analytic.cxx
-    PROPERTIES COMPILE_FLAGS ${OPENMP_FLAGS})
+    PROPERTIES COMPILE_FLAGS ${OpenMP_CXX_FLAGS})
 endif ()
 
 # bspline registration benefits from SSE2

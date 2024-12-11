@@ -225,9 +225,9 @@ endif ()
 if (OPENMP_FOUND)
   set (PLMBASE_LIBRARY_LDFLAGS "${OPENMP_LDFLAGS}")
   set_source_files_properties (bspline_warp.cxx
-    PROPERTIES COMPILE_FLAGS ${OPENMP_FLAGS})
+    PROPERTIES COMPILE_FLAGS ${OpenMP_CXX_FLAGS})
   set_source_files_properties (volume_conv.cxx
-    PROPERTIES COMPILE_FLAGS ${OPENMP_FLAGS})
+    PROPERTIES COMPILE_FLAGS ${OpenMP_CXX_FLAGS})
 endif ()
 
 if (SSE2_FOUND)

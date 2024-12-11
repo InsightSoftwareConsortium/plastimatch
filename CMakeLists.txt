@@ -218,7 +218,7 @@ include (CheckFunctionExists)
 
 # http://www.cmake.org/pipermail/cmake/2008-December/025886.html
 # http://www.cmake.org/Bug/view.php?id=15117
-set (CMAKE_INSTALL_OPENMP_LIBRARIES ON)
+set (CMAKE_INSTALL_OpenMP_CXX_LIBRARIES ON)
 if (${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION} VERSION_LESS 3.1)
     include (InstallRequiredSystemLibrariesPatched)
 else ()

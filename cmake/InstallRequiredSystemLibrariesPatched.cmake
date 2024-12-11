@@ -343,7 +343,7 @@ if(MSVC)
 
   # MSVC 8 was the first version with OpenMP
   # Furthermore, there is no debug version of this
-  if(CMAKE_INSTALL_OPENMP_LIBRARIES)
+  if(CMAKE_INSTALL_OpenMP_CXX_LIBRARIES)
     macro(OPENMP_FILES_FOR_VERSION version_a version_b)
       set(va "${version_a}")
       set(vb "${version_b}")

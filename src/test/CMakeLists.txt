@@ -143,7 +143,7 @@ if (PLM_CONFIG_BUILD_TEST_PROGRAMS)
     # Test executable -- openmp
     if (OPENMP_FOUND)
       set_source_files_properties (openmp_test.cxx
-	PROPERTIES COMPILE_FLAGS ${OPENMP_FLAGS})
+	PROPERTIES COMPILE_FLAGS ${OpenMP_CXX_FLAGS})
       plm_add_executable_v3 (openmp_test openmp_test.cxx
 	"" "${PLASTIMATCH_LIBS}" "${OPENMP_LDFLAGS}" ${INSTALL_NEVER})
     endif ()

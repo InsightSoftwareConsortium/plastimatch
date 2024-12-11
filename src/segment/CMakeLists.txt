@@ -42,7 +42,7 @@ set (PLMSEGMENT_LIBRARY_SRC
 if (OPENMP_FOUND)
   set (PLMSEGMENT_LIBRARY_LDFLAGS "${OPENMP_LDFLAGS}")
   set_source_files_properties (mabs_vote.cxx
-    PROPERTIES COMPILE_FLAGS ${OPENMP_FLAGS})
+    PROPERTIES COMPILE_FLAGS ${OpenMP_CXX_FLAGS})
 endif ()
 
 ##-----------------------------------------------------------------------------

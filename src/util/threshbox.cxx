@@ -95,7 +95,7 @@ void do_threshbox( Threshbox_parms *parms) {
 	{
             if (level> maxlevel) { maxlevel = level;
                 k_max = img_in_iterator.GetIndex(); 
-                img_in->TransformIndexToPhysicalPoint(k_max, phys_max);
+                phys_max = img_in->template TransformIndexToPhysicalPoint<float>(k_max);
             }
 	
 	
@@ -197,7 +197,7 @@ void do_overlap_fraction( Threshbox_parms *parms) {
 
 	if (level>0) {
             kcurr=img1_iterator.GetIndex();
-            img1->TransformIndexToPhysicalPoint( kcurr, phys );
+            phys = img1->template TransformIndexToPhysicalPoint<float>( kcurr );
             xone[j]=phys[0];yone[j]=phys[1];zone[j]=phys[2];
             if (j>vol_img1_int) { fprintf(stderr,"inconsistent labelmap vox count!\n"); exit(1);}
             j++;		
@@ -228,7 +228,7 @@ void do_overlap_fraction( Threshbox_parms *parms) {
 
 	if (level>0) {
             kcurr=img2_iterator.GetIndex();
-            img2->TransformIndexToPhysicalPoint( kcurr, phys );
+            phys = img2->template TransformIndexToPhysicalPoint<float>( kcurr );
             xone[j]=phys[0];yone[j]=phys[1];zone[j]=phys[2];
             if (j>vol_img2_int) { fprintf(stderr,"inconsistent labelmap vox count!\n"); exit(1);}
             j++;		
@@ -287,7 +287,7 @@ void do_overlap_fraction( Threshbox_parms *parms) {
         
 	/*make sure we can process images with different offsets etc*/
 	k1=img1_iterator.GetIndex();
-	img1->TransformIndexToPhysicalPoint( k1, phys );
+	phys = img1->template TransformIndexToPhysicalPoint<float>( k1 );
 	in_image = img2->TransformPhysicalPointToIndex( phys, k2) ;
 	
 	if (in_image) {
@@ -302,15 +302,15 @@ void do_overlap_fraction( Threshbox_parms *parms) {
 
     //check if phys_max1 is in overlap
     int max1_in;
-    img1->TransformPhysicalPointToIndex(phys_max1, k_max1);
-    img2->TransformPhysicalPointToIndex(phys_max1, k_max2);
+    k_max1 = img1->TransformPhysicalPointToIndex(phys_max1);
+    k_max2 = img2->TransformPhysicalPointToIndex(phys_max1);
     level11 = img1->GetPixel(k_max1);
     level22 = img2->GetPixel(k_max2);
     if (level11 > 0 && level22 > 0 ) max1_in = 1; else max1_in = 0;
 
     int max2_in;
-    img1->TransformPhysicalPointToIndex(phys_max2, k_max1);
-    img2->TransformPhysicalPointToIndex(phys_max2, k_max2);
+    k_max1 = img1->TransformPhysicalPointToIndex(phys_max2);
+    k_max2 = img2->TransformPhysicalPointToIndex(phys_max2);
     level11 = img1->GetPixel(k_max1);
     level22 = img2->GetPixel(k_max2);
     if (level11 > 0 && level22 > 0 ) max2_in = 1; else max2_in = 0;

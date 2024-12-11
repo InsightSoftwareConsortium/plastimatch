@@ -84,8 +84,7 @@ pointset_warp (
             fixed_location[2] = warped_pointset->point_list[i].p[2];
 
             /* Get deformation at current estimate */
-            itk::ContinuousIndex<float,3> ci;
-            vf->TransformPhysicalPointToContinuousIndex (fixed_location, ci);
+            itk::ContinuousIndex<float,3> ci = vf->template TransformPhysicalPointToContinuousIndex<float> (fixed_location);
             FloatVector3DType dxyz 
                 = interpolator->EvaluateAtContinuousIndex (ci);
 

@@ -80,7 +80,6 @@ itk_crop_by_coord (
         = image->GetLargestPossibleRegion();
     
     itk::Point<double,3> p1, p2;
-    itk::ContinuousIndex<double,3> i1, i2;
     p1[0] = new_size[0];
     p2[0] = new_size[1];
     p1[1] = new_size[2];
@@ -89,8 +88,9 @@ itk_crop_by_coord (
     p2[2] = new_size[5];
     //image->TransformPhysicalPointToIndex (p1, i1);
     //image->TransformPhysicalPointToIndex (p2, i2);
-    image->TransformPhysicalPointToContinuousIndex (p1, i1);
-    image->TransformPhysicalPointToContinuousIndex (p2, i2);
+    using ContinuousIndexType = itk::ContinuousIndex<double,3>;
+    ContinuousIndexType i1 = image->template TransformPhysicalPointToContinuousIndex<double> (p1);
+    ContinuousIndexType i2 = image->template TransformPhysicalPointToContinuousIndex<double> (p2);
 
     CLAMP2 (i1[0], i2[0], 0, current_region.GetSize(0)-1);
     CLAMP2 (i1[1], i2[1], 0, current_region.GetSize(1)-1);

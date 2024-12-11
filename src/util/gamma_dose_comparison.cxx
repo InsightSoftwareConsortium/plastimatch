@@ -644,8 +644,8 @@ Gamma_dose_comparison_private::do_gamma_analysis ()
             ref_dose_general = this->reference_dose;	//by default, this is coming from ref dose (max dose if not defined)
                        
         k1 = itk_1_iterator.GetIndex();
-        itk_1->TransformIndexToPhysicalPoint(k1, phys);
-        itk_2->TransformPhysicalPointToIndex(phys, k2);
+        phys = itk_1->template TransformIndexToPhysicalPoint<float>(k1);
+        k2 = itk_2->TransformPhysicalPointToIndex(phys);
 
         
         if (b_ref_only_threshold) //don't care the corresponding pixel value
@@ -667,7 +667,7 @@ Gamma_dose_comparison_private::do_gamma_analysis ()
         }		
 
         /*k1=itk_1_iterator.GetIndex();
-        itk_1->TransformIndexToPhysicalPoint( k1, phys );
+        phys = itk_1->template TransformIndexToPhysicalPoint<float>( k1 );
         itk_2->TransformPhysicalPointToIndex( phys, k2 );		*/
 
         //k2 is the voxel index of the k1's physical (mm) position in img2

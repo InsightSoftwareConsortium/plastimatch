@@ -451,8 +451,7 @@ ScaleInvariantFeatureImageFilter<TFixedImageType,VDimension>
       sprintf(filename, "GaussianCircle.mha");
       this->writeImage(gaussImgSource->GetOutput(), filename);*/
     
-    IndexType pixelIndex;
-    fixedImage->TransformPhysicalPointToIndex(point, pixelIndex);
+    IndexType pixelIndex = fixedImage->TransformPhysicalPointToIndex(point);
      
     // return the Gaussian weighted Histogram
     return this->GetSiftKey(hgradImage, gaussImgSource->GetOutput(),

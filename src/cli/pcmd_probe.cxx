@@ -45,8 +45,7 @@ probe_img_main (Probe_parms *parms)
 	cindex[1] = index_list[i*3+1];
 	cindex[2] = index_list[i*3+2];
 
-	FloatPoint3DType point;
-	img->TransformContinuousIndexToPhysicalPoint (cindex, point);
+	FloatPoint3DType point = img->template TransformContinuousIndexToPhysicalPoint<float> (cindex);
 	printf ("%4d: %7.2f, %7.2f, %7.2f; %7.2f, %7.2f, %7.2f; ", 
 	    i, cindex[0], cindex[1], cindex[2], 
 	    point[0], point[1], point[2]);
@@ -70,8 +69,7 @@ probe_img_main (Probe_parms *parms)
 	point[1] = location_list[i*3+1];
 	point[2] = location_list[i*3+2];
 
-	itk::ContinuousIndex<float, 3> cindex;
-	img->TransformPhysicalPointToContinuousIndex (point, cindex);
+	itk::ContinuousIndex<float, 3> cindex = img->template TransformPhysicalPointToContinuousIndex<float> (point);
 	printf ("%4d: %7.2f, %7.2f, %7.2f; %7.2f, %7.2f, %7.2f; ", 
 	    (int) (index_list.size() / 3) + i, 
 	    cindex[0], cindex[1], cindex[2], 
@@ -109,8 +107,7 @@ probe_vf_main (Probe_parms *parms)
 	cindex[1] = index_list[i*3+1];
 	cindex[2] = index_list[i*3+2];
 
-	FloatPoint3DType point;
-	img->TransformContinuousIndexToPhysicalPoint (cindex, point);
+	FloatPoint3DType point = img->template TransformContinuousIndexToPhysicalPoint<float> (cindex);
 	printf ("%4d: %7.2f, %7.2f, %7.2f; %7.2f, %7.2f, %7.2f; ", 
 	    i, cindex[0], cindex[1], cindex[2], 
 	    point[0], point[1], point[2]);
@@ -135,8 +132,7 @@ probe_vf_main (Probe_parms *parms)
 	point[1] = location_list[i*3+1];
 	point[2] = location_list[i*3+2];
 
-	itk::ContinuousIndex<float, 3> cindex;
-	img->TransformPhysicalPointToContinuousIndex (point, cindex);
+	itk::ContinuousIndex<float, 3> cindex = img->template TransformPhysicalPointToContinuousIndex<float> (point);
 	printf ("%4d: %7.2f, %7.2f, %7.2f; %7.2f, %7.2f, %7.2f; ", 
 	    (int) (index_list.size() / 3) + i, 
 	    cindex[0], cindex[1], cindex[2], 

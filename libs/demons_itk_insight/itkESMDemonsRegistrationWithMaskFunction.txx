@@ -276,7 +276,7 @@ ESMDemonsRegistrationWithMaskFunction<TFixedImage, TMovingImage,
           mappedPoint[j] = fixedPoint[j] + it.GetCenterPixel()[j];
        }
 	   
-       if (  !this->GetMovingImageMask()->IsInside(mappedPoint) )
+       if (  !this->GetMovingImageMask()->IsInsideInWorldSpace(mappedPoint) )
        {
          update.Fill( 0.0 );
          return update;
@@ -285,7 +285,7 @@ ESMDemonsRegistrationWithMaskFunction<TFixedImage, TMovingImage,
 	
     if(this->GetFixedImageMask())
     {
-        if ( !this->GetFixedImageMask()->IsInside(fixedPoint) )
+        if ( !this->GetFixedImageMask()->IsInsideInWorldSpace(fixedPoint) )
        {
          update.Fill( 0.0 );
          return update;

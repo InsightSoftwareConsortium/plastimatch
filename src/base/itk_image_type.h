@@ -18,6 +18,7 @@
 
 #include "itkImageIOBase.h"
 #include "itkVectorImage.h"
+#include "itkCommonEnums.h"
 
 #include "itk_point.h"
 

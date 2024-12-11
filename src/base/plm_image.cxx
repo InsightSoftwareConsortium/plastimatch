@@ -295,8 +295,8 @@ Plm_image::load (const std::string& fname, Plm_image_type type)
 bool
 Plm_image::load_native (const char* fname)
 {
-    itk::ImageIOBase::IOPixelType pixel_type;
-    itk::ImageIOBase::IOComponentType component_type;
+    itk::IOPixelEnum pixel_type;
+    itk::IOComponentEnum component_type;
     int num_dimensions, num_components;
 
     if (is_directory (fname)) {
@@ -334,7 +334,7 @@ Plm_image::load_native (const char* fname)
 	&component_type, &num_components);
 
     /* Handle RGB images as a special case */
-    if (pixel_type == itk::ImageIOBase::RGB) {
+    if (pixel_type == itk::IOPixelEnum::RGB) {
 	this->m_itk_uchar = itk_image_load_uchar (fname, 0);
 	this->m_original_type = PLM_IMG_TYPE_ITK_UCHAR;
 	this->m_type = PLM_IMG_TYPE_ITK_UCHAR;
@@ -342,7 +342,7 @@ Plm_image::load_native (const char* fname)
     }
 
     /* Handle ss_image as a special case */
-    if (num_components > 1 && component_type == itk::ImageIOBase::UCHAR) {
+    if (num_components > 1 && component_type == itk::IOComponentEnum::UCHAR) {
 	this->m_itk_uchar_vec = itk_image_load_uchar_vec (fname);
 	this->m_original_type = PLM_IMG_TYPE_ITK_UCHAR_VEC;
 	this->m_type = PLM_IMG_TYPE_ITK_UCHAR_VEC;
@@ -350,52 +350,52 @@ Plm_image::load_native (const char* fname)
     }
 
     switch (component_type) {
-    case itk::ImageIOBase::UCHAR:
+    case itk::IOComponentEnum::UCHAR:
 	this->m_itk_uchar = itk_image_load_uchar (fname, 0);
 	this->m_original_type = PLM_IMG_TYPE_ITK_UCHAR;
 	this->m_type = PLM_IMG_TYPE_ITK_UCHAR;
 	break;
-    case itk::ImageIOBase::CHAR:
+    case itk::IOComponentEnum::CHAR:
 	this->m_itk_char = itk_image_load_char (fname, 0);
 	this->m_original_type = PLM_IMG_TYPE_ITK_CHAR;
 	this->m_type = PLM_IMG_TYPE_ITK_CHAR;
 	break;
-    case itk::ImageIOBase::USHORT:
+    case itk::IOComponentEnum::USHORT:
 	this->m_itk_ushort = itk_image_load_ushort (fname, 0);
 	this->m_original_type = PLM_IMG_TYPE_ITK_USHORT;
 	this->m_type = PLM_IMG_TYPE_ITK_USHORT;
 	break;
-    case itk::ImageIOBase::SHORT:
+    case itk::IOComponentEnum::SHORT:
 	this->m_itk_short = itk_image_load_short (fname, 0);
 	this->m_original_type = PLM_IMG_TYPE_ITK_SHORT;
 	this->m_type = PLM_IMG_TYPE_ITK_SHORT;
 	break;
 #if (CMAKE_SIZEOF_UINT == 4)
-    case itk::ImageIOBase::UINT:
+    case itk::IOComponentEnum::UINT:
 #endif
 #if (CMAKE_SIZEOF_ULONG == 4)
-    case itk::ImageIOBase::ULONG:
+    case itk::IOComponentEnum::ULONG:
 #endif
 	this->m_itk_uint32 = itk_image_load_uint32 (fname, 0);
 	this->m_original_type = PLM_IMG_TYPE_ITK_ULONG;
 	this->m_type = PLM_IMG_TYPE_ITK_ULONG;
 	break;
 #if (CMAKE_SIZEOF_UINT == 4)
-    case itk::ImageIOBase::INT:
+    case itk::IOComponentEnum::INT:
 #endif
 #if (CMAKE_SIZEOF_ULONG == 4)
-    case itk::ImageIOBase::LONG:
+    case itk::IOComponentEnum::LONG:
 #endif
 	this->m_itk_int32 = itk_image_load_int32 (fname, 0);
 	this->m_original_type = PLM_IMG_TYPE_ITK_LONG;
 	this->m_type = PLM_IMG_TYPE_ITK_LONG;
 	break;
 #if (CMAKE_SIZEOF_ULONG == 8)
-    case itk::ImageIOBase::ULONG:
+    case itk::IOComponentEnum::ULONG:
 #endif
 #if (ITK_VERSION_MAJOR > 4) || (ITK_VERSION_MAJOR == 4 && ITK_VERSION_MINOR > 12)
 #  if (CMAKE_SIZEOF_ULONGLONG == 8)
-    case itk::ImageIOBase::ULONGLONG:
+    case itk::IOComponentEnum::ULONGLONG:
 #  endif
 #endif
 	this->m_itk_uint64 = itk_image_load_uint64 (fname, 0);
@@ -403,23 +403,23 @@ Plm_image::load_native (const char* fname)
 	this->m_type = PLM_IMG_TYPE_ITK_UINT64;
 	break;
 #if (CMAKE_SIZEOF_ULONG == 8)
-    case itk::ImageIOBase::LONG:
+    case itk::IOComponentEnum::LONG:
 #endif
 #if (ITK_VERSION_MAJOR > 4) || (ITK_VERSION_MAJOR == 4 && ITK_VERSION_MINOR > 12)
 #  if (CMAKE_SIZEOF_ULONGLONG == 8)
-    case itk::ImageIOBase::LONGLONG:
+    case itk::IOComponentEnum::LONGLONG:
 #  endif
 #endif
 	this->m_itk_int64 = itk_image_load_int64 (fname, 0);
 	this->m_original_type = PLM_IMG_TYPE_ITK_INT64;
 	this->m_type = PLM_IMG_TYPE_ITK_INT64;
 	break;
-    case itk::ImageIOBase::FLOAT:
+    case itk::IOComponentEnum::FLOAT:
 	this->m_itk_float = itk_image_load_float (fname, 0);
 	this->m_original_type = PLM_IMG_TYPE_ITK_FLOAT;
 	this->m_type = PLM_IMG_TYPE_ITK_FLOAT;
 	break;
-    case itk::ImageIOBase::DOUBLE:
+    case itk::IOComponentEnum::DOUBLE:
 	this->m_itk_double = itk_image_load_double (fname, 0);
 	this->m_original_type = PLM_IMG_TYPE_ITK_DOUBLE;
 	this->m_type = PLM_IMG_TYPE_ITK_DOUBLE;

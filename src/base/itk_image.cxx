@@ -25,13 +25,13 @@ void
 itk_image_get_props (
     const std::string& fileName,
     int *num_dimensions, 
-    itk::ImageIOBase::IOPixelType *pixel_type, 
-    itk::ImageIOBase::IOComponentType *component_type, 
+    itk::IOPixelEnum *pixel_type, 
+    itk::IOComponentEnum *component_type, 
     int *num_components
 )
 {
-    *pixel_type = itk::ImageIOBase::UNKNOWNPIXELTYPE;
-    *component_type = itk::ImageIOBase::UNKNOWNCOMPONENTTYPE;
+    *pixel_type = itk::IOPixelEnum::UNKNOWNPIXELTYPE;
+    *component_type = itk::IOComponentEnum::UNKNOWNCOMPONENTTYPE;
     *num_dimensions = 0;
     *num_components = 0;
     typedef itk::Image<short, 3> ImageType;

@@ -36,7 +36,10 @@ do_dicom_info (Dicom_info_parms *parms)
   
     typedef itk::GDCMImageIO ImageIOType;
     ImageIOType::Pointer dicomIO = ImageIOType::New();
+#if ITK_VERSION_MAJOR < 5
+    // No effect in ITK 5
     dicomIO->SetMaxSizeLoadEntry(0xffff);
+#endif
 
     printf ("Reading input file: %s\n", parms->input_dir.c_str());
     reader->SetFileName(parms->input_dir);

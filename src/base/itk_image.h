@@ -10,6 +10,8 @@
 #include "itk_direction_type.h"
 #include "itk_image_type.h"
 
+#include "itkImageIOBase.h"
+
 class Plm_image_header;
 class Volume_header;
 
@@ -26,9 +28,9 @@ typedef itk::VariableLengthVector<unsigned char> UCharVecType;
    ----------------------------------------------------------------------- */
 PLMBASE_C_API void itk_image_get_props (
     const std::string& fileName,
-    int *num_dimensions, 
-    itk::ImageIOBase::IOPixelType *pixel_type, 
-    itk::ImageIOBase::IOComponentType *component_type, 
+    int *num_dimensions,
+    itk::IOPixelEnum *pixel_type,
+    itk::IOComponentEnum *component_type,
     int *num_components
 );
 

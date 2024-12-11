@@ -6,6 +6,7 @@
 #include <string.h>
 #include "itkImageRegionConstIteratorWithIndex.h"
 #if ITK_VERSION_MAJOR >= 5
+#include "itkMultiThreaderBase.h"
 #include "itkPlatformMultiThreader.h"
 #else
 #include "itkMultiThreader.h"
@@ -45,7 +46,6 @@ public:
     Xform::Pointer xf_out;
 
 #if ITK_VERSION_MAJOR >= 5
-    itk::PlatformMultiThreader::Pointer threader;
 #else
     itk::MultiThreader::Pointer threader;
 #endif
@@ -62,7 +62,6 @@ public:
         xf_out = Xform::New ();
 
 #if ITK_VERSION_MAJOR >= 5
-        threader = itk::PlatformMultiThreader::New ();
 #else
         threader = itk::MultiThreader::New ();
 #endif
@@ -587,27 +586,26 @@ Registration::run_main_thread ()
 
 static 
 #if ITK_VERSION_MAJOR >= 5
-ITK_THREAD_RETURN_FUNCTION_CALL_CONVENTION
+void
 #else
 ITK_THREAD_RETURN_TYPE
 #endif
 registration_main_thread (void* param)
 {
 #if ITK_VERSION_MAJOR >= 5
-    itk::PlatformMultiThreader::ThreadInfoStruct *info 
-        = (itk::PlatformMultiThreader::ThreadInfoStruct*) param;
+    Registration* reg = (Registration*) param;
 #else
-    itk::MultiThreader::ThreadInfoStruct *info 
+    itk::MultiThreader::ThreadInfoStruct *info
         = (itk::MultiThreader::ThreadInfoStruct*) param;
-#endif
     Registration* reg = (Registration*) info->UserData;
+#endif
 
     printf ("Inside registration worker thread\n");
     reg->run_main_thread ();
     printf ("** Registration worker thread finished.\n");
 
 #if ITK_VERSION_MAJOR >= 5
-    return itk::ITK_THREAD_RETURN_DEFAULT_VALUE;
+    return;
 #else
     return ITK_THREAD_RETURN_VALUE;
 #endif
@@ -616,12 +614,21 @@ registration_main_thread (void* param)
 void 
 Registration::start_registration ()
 {
-    /* Otherwise, start a new job */
+    // Reset quit flag
     d_ptr->time_to_quit = false;
-    printf ("Launching registration worker thread\n");
-    d_ptr->worker_running.grab ();
+    printf("Launching registration worker thread\n");
+    d_ptr->worker_running.grab();
+
+#if ITK_VERSION_MAJOR >= 5
+    // Create std::thread instead of using SpawnThread
+    std::thread worker_thread(registration_main_thread, this);
+    worker_thread.detach();  // Detach thread to run independently
+#else
     d_ptr->thread_no = d_ptr->threader->SpawnThread (
         registration_main_thread, (void*) this);
+#endif
+
+
 }
 
 void 

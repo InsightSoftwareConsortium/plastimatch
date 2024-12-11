@@ -165,9 +165,12 @@ plm_warp_linear (
     itk::Matrix<double,3,3> new_dc = mat_inv * pih->GetDirection ();
     
     /* Rotate and translate origin */
-    itk::Vector<double,3> off_inv = itk_aff_inv->GetOffset ();
-    itk::Point<double,3> new_origin =
-        mat_inv * pih->GetOrigin().GetVectorFromOrigin() + itk_aff_inv->GetOffset ();
+    const itk::Vector<double,3> off_inv = itk_aff_inv->GetOffset ();
+    const auto transformed_origin = mat_inv * pih->GetOrigin().GetVectorFromOrigin();
+    itk::Point<double,3> new_origin;
+    for (unsigned int i = 0; i < 3; ++i) {
+      new_origin[i] = transformed_origin[i] + itk_aff_inv->GetOffset()[i];
+    }
 
     /* Clone the image voxels */
     im_warped = im_in->clone ();

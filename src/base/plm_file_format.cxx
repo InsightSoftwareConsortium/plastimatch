@@ -139,20 +139,20 @@ plm_file_format_deduce (const char* path)
         return PLM_FILE_FMT_DICOM_RTPLAN;
     }
 
-    itk::ImageIOBase::IOPixelType pixel_type;
-    itk::ImageIOBase::IOComponentType component_type;
+    itk::IOPixelEnum pixel_type;
+    itk::IOComponentEnum component_type;
     int num_dimensions, num_components;
     itk_image_get_props (std::string (path), &num_dimensions, &pixel_type, 
 	&component_type, &num_components);
-    if (pixel_type == itk::ImageIOBase::VECTOR) {
+    if (pixel_type == itk::IOPixelEnum::VECTOR) {
 	/* Maybe vector field? */
-	if (component_type == itk::ImageIOBase::FLOAT
-            || component_type == itk::ImageIOBase::DOUBLE) {
+	if (component_type == itk::IOComponentEnum::FLOAT
+            || component_type == itk::IOComponentEnum::DOUBLE) {
 	    return PLM_FILE_FMT_VF;
 	}
 	/* Maybe ss_image? */
 	if (num_components >= 2 
-	    && component_type == itk::ImageIOBase::UCHAR)
+	    && component_type == itk::IOComponentEnum::UCHAR)
 	{
 	    return PLM_FILE_FMT_SS_IMG_VEC;
 	}

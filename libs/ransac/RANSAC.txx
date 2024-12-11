@@ -1,6 +1,8 @@
 #ifndef _RANSAC_TXX_
 #define _RANSAC_TXX_
 
+#include "itkMultiThreaderBase.h"
+
 
 namespace itk {
 
@@ -111,7 +113,7 @@ double RANSAC<T,S>::Compute( std::vector<S> &parameters,
 #else
     itk::MultiThreader::Pointer threader = itk::MultiThreader::New();   
 #endif
-    threader->SetNumberOfThreads( this->numberOfThreads );
+    threader->SetMaximumNumberOfThreads( this->numberOfThreads );
     threader->SetSingleMethod( RANSAC<T,S>::RANSACThreadCallback, this );
     //runs all threads and blocks till they finish
     threader->SingleMethodExecute();
@@ -157,7 +159,7 @@ ITK_THREAD_RETURN_TYPE
 RANSAC<T,S>::RANSACThreadCallback( void *arg )
 {
 #if ITK_VERSION_MAJOR >= 5
-    typedef itk::PlatformMultiThreader::ThreadInfoStruct ThreadInfoType;
+    typedef itk::MultiThreaderBase::WorkUnitInfo ThreadInfoType;
 #else
     typedef itk::MultiThreader::ThreadInfoStruct ThreadInfoType;
 #endif

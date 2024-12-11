@@ -459,7 +459,7 @@ itk_xform_load (Xform *xf, const char* fn)
     }
 
     /* Confirm that there is only one xform in the file */
-    typedef itk::TransformFileReader::TransformListType* TransformListType;
+    typedef const itk::TransformFileReader::TransformListType* TransformListType;
     TransformListType transfList = transfReader->GetTransformList();
     if (transfList->size() != 1) {
         print_and_exit ("Error. ITK transform file has multiple "

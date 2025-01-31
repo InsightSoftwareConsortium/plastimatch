@@ -3,6 +3,11 @@
 ##-----------------------------------------------------------------------------
 project (src_plastimatch_cli)
 
+if (WASI)
+  # skip until threads are available
+  return()
+endif()
+
 include_directories (BEFORE ${CMAKE_CURRENT_SOURCE_DIR})
 include_directories (AFTER ${LUA_INCLUDE_DIR})
 

@@ -132,7 +132,6 @@ set (PLASTIMATCH_LIBS
   plmclp
 #  plmscript
   plmsegment
-  plmregister
   plmreconstruct
   plmdose
   plmutil
@@ -144,6 +143,9 @@ set (PLASTIMATCH_LIBS
 #  lua
   ${MATH_LIB}
   )
+if (NOT WASI)
+  list(APPEND PLASTIMATCH_LIBS plmregister)
+endif()
 
 #if (CUDA_FOUND AND NOT PLM_USE_GPU_PLUGINS)
 if (CUDA_FOUND)

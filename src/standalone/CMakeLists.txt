@@ -3,6 +3,11 @@
 ##-----------------------------------------------------------------------------
 project (src_plastimatch_standalone)
 
+if (WASI)
+  # Skip until threads are available
+  return()
+endif()
+
 include_directories (BEFORE ${CMAKE_CURRENT_SOURCE_DIR})
 include_directories (BEFORE ${CMAKE_CURRENT_BINARY_DIR})
 include_directories (AFTER ${INIH_INCLUDE_DIR})

@@ -31,14 +31,14 @@ public:
     itkNewMacro( Self )
 
     virtual void Estimate( std::vector< Autolabel_point *> &data, 
-	std::vector<double> &parameters );
+	std::vector<double> &parameters ) override;
     virtual void Estimate( std::vector< Autolabel_point > &data, 
-	std::vector<double> &parameters );
+	std::vector<double> &parameters ) override;
 
     virtual void LeastSquaresEstimate( std::vector< Autolabel_point *> &data, 
-	std::vector<double> &parameters );
+	std::vector<double> &parameters ) override;
     virtual void LeastSquaresEstimate( std::vector< Autolabel_point > &data, 
-	std::vector<double> &parameters );
+	std::vector<double> &parameters ) override;
 
     virtual bool Agree( std::vector<double> &parameters, 
 	Autolabel_point &data );

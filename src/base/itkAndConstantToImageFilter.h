@@ -102,7 +102,7 @@ UnaryFunctorImageFilter<TInputImage,TOutputImage,
     AndConstantToImageFilter() {};
     virtual ~AndConstantToImageFilter() {};
    
-    void PrintSelf(std::ostream &os, Indent indent) const
+    void PrintSelf(std::ostream &os, Indent indent) const override
     {
 	Superclass::PrintSelf(os, indent);
 	os << indent << "Constant: " 

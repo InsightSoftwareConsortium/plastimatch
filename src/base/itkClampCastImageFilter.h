@@ -40,12 +40,12 @@ class ITK_EXPORT ClampCastImageFilter
   protected:
     ClampCastImageFilter();
     ~ClampCastImageFilter() {};
-    void PrintSelf(std::ostream& os, Indent indent) const;
+    void PrintSelf(std::ostream& os, Indent indent) const override;
 
 #if ITK_VERSION_MAJOR >= 4
     void ThreadedGenerateData (
 	const OutputImageRegionType& outputRegionForThread,
-	ThreadIdType threadId);
+	ThreadIdType threadId) override;
 #else
     void ThreadedGenerateData (
 	const OutputImageRegionType& outputRegionForThread,

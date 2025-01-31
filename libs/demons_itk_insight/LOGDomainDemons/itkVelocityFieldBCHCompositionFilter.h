@@ -79,7 +79,7 @@ protected:
   /** 
    * GenerateData()
    */
-  void GenerateData();
+  void GenerateData() override;
 
   /** Adder type. */
   typedef NaryAddImageFilter<InputFieldType,InputFieldType>                   AdderType;

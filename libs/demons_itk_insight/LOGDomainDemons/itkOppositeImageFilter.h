@@ -99,7 +99,7 @@ protected:
   OppositeImageFilter() {};
   virtual ~OppositeImageFilter() {};
    
-  void PrintSelf(std::ostream &os, Indent indent) const
+  void PrintSelf(std::ostream &os, Indent indent) const override
     {
     Superclass::PrintSelf(os, indent);
     }

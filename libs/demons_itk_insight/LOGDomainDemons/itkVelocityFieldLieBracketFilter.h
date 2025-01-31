@@ -105,7 +105,7 @@ public:
 protected:
    VelocityFieldLieBracketFilter();
   ~VelocityFieldLieBracketFilter() {};
-  void PrintSelf(std::ostream& os, Indent indent) const;
+  void PrintSelf(std::ostream& os, Indent indent) const override;
 
   /** VelocityFieldLieBracketFilter can be implemented as a multithreaded filter.
    * Therefore, this implementation provides a ThreadedGenerateData() routine
@@ -120,7 +120,7 @@ protected:
   void ThreadedGenerateData(const OutputFieldRegionType& outputRegionForThread,
                             int threadId );
 
-  void BeforeThreadedGenerateData();
+  void BeforeThreadedGenerateData() override;
   
   /** Set right and left gradient calculators. */
   itkSetObjectMacro( RightGradientCalculator, InputFieldGradientCalculatorType );

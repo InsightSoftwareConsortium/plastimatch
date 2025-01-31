@@ -143,7 +143,7 @@ public:
    * set. While PDEDeformableRegistration can take a third input as an
    * initial deformation field, this input is not a required input.
    */
-  virtual std::vector<SmartPointer<DataObject> >::size_type GetNumberOfValidRequiredInputs() const;
+  std::vector<SmartPointer<DataObject> >::size_type GetNumberOfValidRequiredInputs() const override;
 
   /** Set/Get whether the deformation field is smoothed 
    * (regularized). Smoothing the deformation yields a solution
@@ -213,11 +213,11 @@ public:
 protected:
   PDEDeformableRegistrationWithMaskFilter();
   ~PDEDeformableRegistrationWithMaskFilter() {}
-  void PrintSelf(std::ostream& os, Indent indent) const;
+  void PrintSelf(std::ostream& os, Indent indent) const override;
 
   /** Supplies the halting criteria for this class of filters.  The
    * algorithm will stop after a user-specified number of iterations. */
-  virtual bool Halt()
+  bool Halt() override
     {
 
     if ( m_StopRegistrationFlag )
@@ -230,7 +230,7 @@ protected:
 
   /** A simple method to copy the data from the input to the output.
    * If the input does not exist, a zero field is written to the output. */
-  virtual void CopyInputToOutput();
+  void CopyInputToOutput() override;
 
   /** Initialize the state of filter and equation before each iteration.
    * Progress feeback is implemented as part of this method. */

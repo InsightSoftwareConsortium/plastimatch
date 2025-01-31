@@ -11,6 +11,54 @@
 
 #include <fstream>
 
+#ifdef __wasi__
+// Workaround for char_traits<unsigned int> not in libc++19 and newer
+namespace std {
+template<>
+struct char_traits<unsigned int> {
+    typedef unsigned int char_type;
+    typedef unsigned int int_type;
+    typedef streamoff off_type;
+    typedef streampos pos_type;
+    typedef mbstate_t state_type;
+
+    static void assign(char_type& c1, const char_type& c2) noexcept { c1 = c2; }
+    static char_type* assign(char_type* s, size_t n, char_type a) {
+        for (size_t i = 0; i < n; ++i)
+            s[i] = a;
+        return s;
+    }
+    static bool eq(char_type c1, char_type c2) noexcept { return c1 == c2; }
+    static bool lt(char_type c1, char_type c2) noexcept { return c1 < c2; }
+
+    static int compare(const char_type* s1, const char_type* s2, size_t n) {
+        for (size_t i = 0; i < n; ++i) {
+            if (lt(s1[i], s2[i])) return -1;
+            if (lt(s2[i], s1[i])) return 1;
+        }
+        return 0;
+    }
+
+    static char_type* copy(char_type* dest, const char_type* src, size_t n) {
+        std::memcpy(dest, src, n * sizeof(char_type));
+        return dest;
+    }
+
+    static size_t length(const char_type* s) {
+        size_t len = 0;
+        while (!eq(s[len], char_type(0))) ++len;
+        return len;
+    }
+
+    static const char_type* find(const char_type* s, size_t n, const char_type& a) {
+        for (size_t i = 0; i < n; ++i)
+            if (eq(s[i], a)) return s + i;
+        return nullptr;
+    }
+};
+}
+#endif
+
 namespace dlib
 {
 

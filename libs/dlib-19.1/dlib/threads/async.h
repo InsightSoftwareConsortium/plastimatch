@@ -52,21 +52,34 @@ namespace dlib
         typename Function, 
         typename ...Args
         >
+#if __cplusplus >= 201703L
+    std::future<std::invoke_result_t<Function, Args...>> async(
+#else
     std::future<typename std::result_of<Function(Args...)>::type> async(
+#endif
         thread_pool& tp, 
         Function&& f, 
         Args&&... args 
     )
     {
+#if __cplusplus >= 201703L
+        auto prom = std::make_shared<std::promise<std::invoke_result_t<Function, Args...>>>();
+        std::future<std::invoke_result_t<Function, Args...>> ret = prom->get_future();
+#else
         auto prom = std::make_shared<std::promise<typename std::result_of<Function(Args...)>::type>>();
         std::future<typename std::result_of<Function(Args...)>::type> ret = prom->get_future();
+#endif
         using bind_t = decltype(std::bind(std::forward<Function>(f), std::forward<Args>(args)...));
         auto fun = std::make_shared<bind_t>(std::bind(std::forward<Function>(f), std::forward<Args>(args)...));
         tp.add_task_by_value([fun, prom]()
         { 
             try
             {
+#if __cplusplus >= 201703L
+                impl::call_prom_set_value(*prom, *fun, impl::selector<std::invoke_result_t<Function, Args...>>());
+#else
                 impl::call_prom_set_value(*prom, *fun, impl::selector<typename std::result_of<Function(Args...)>::type>());
+#endif
             }
             catch(...)
             {
@@ -82,7 +95,11 @@ namespace dlib
         typename Function, 
         typename ...Args
         >
+#if __cplusplus >= 201703L
+    std::future<std::invoke_result_t<Function, Args...>> async(
+#else
     std::future<typename std::result_of<Function(Args...)>::type> async(
+#endif
         Function&& f, 
         Args&&... args 
     )

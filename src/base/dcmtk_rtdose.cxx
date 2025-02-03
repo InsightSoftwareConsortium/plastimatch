@@ -354,7 +354,7 @@ Dcmtk_rt_study::dose_save (const char *dicom_dir)
     dataset->putAndInsertString (DCM_ImageType, 
         "DERIVED\\SECONDARY\\REFORMATTED");
     dataset->putAndInsertOFStringArray(DCM_InstanceCreatorUID, 
-        PLM_UID_PREFIX);
+        PlmUidPrefix::getInstance().get().c_str());
 
     dataset->putAndInsertString (DCM_ReferringPhysicianName, "");
 

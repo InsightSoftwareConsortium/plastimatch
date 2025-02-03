@@ -135,5 +135,5 @@ dicom_uid (const char *uid_root)
 std::string
 dicom_uid ()
 {
-    return dicom_uid (PLM_UID_PREFIX);
+    return dicom_uid (PlmUidPrefix::getInstance().get().c_str());
 }

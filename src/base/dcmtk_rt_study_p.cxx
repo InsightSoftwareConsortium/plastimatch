@@ -16,14 +16,15 @@ Dcmtk_rt_study_private::Dcmtk_rt_study_private ()
 {
     DcmDate::getCurrentDate (date_string);
     DcmTime::getCurrentTime (time_string);
-    dcmtk_uid (study_uid, PLM_UID_PREFIX);
-    dcmtk_uid (for_uid, PLM_UID_PREFIX);
-    dcmtk_uid (ct_series_uid, PLM_UID_PREFIX);
-    dcmtk_uid (plan_instance_uid, PLM_UID_PREFIX);
-    dcmtk_uid (rtss_instance_uid, PLM_UID_PREFIX);
-    dcmtk_uid (rtss_series_uid, PLM_UID_PREFIX);
-    dcmtk_uid (dose_series_uid, PLM_UID_PREFIX);
-    dcmtk_uid (dose_instance_uid, PLM_UID_PREFIX);
+    const std::string uid_prefix{ PlmUidPrefix::getInstance().get() };
+    dcmtk_uid (study_uid, uid_prefix.c_str());
+    dcmtk_uid (for_uid, uid_prefix.c_str());
+    dcmtk_uid (ct_series_uid, uid_prefix.c_str());
+    dcmtk_uid (plan_instance_uid, uid_prefix.c_str());
+    dcmtk_uid (rtss_instance_uid, uid_prefix.c_str());
+    dcmtk_uid (rtss_series_uid, uid_prefix.c_str());
+    dcmtk_uid (dose_series_uid, uid_prefix.c_str());
+    dcmtk_uid (dose_instance_uid, uid_prefix.c_str());
     slice_data = new std::vector<Dcmtk_slice_data>;
 
     rt_study_metadata = Rt_study_metadata::New ();

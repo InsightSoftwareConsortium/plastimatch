@@ -288,7 +288,7 @@ Dcmtk_rt_study::rtss_save (const char *dicom_dir)
     dataset->putAndInsertOFStringArray(DCM_InstanceCreationTime, 
         d_ptr->rt_study_metadata->get_study_time());
     dataset->putAndInsertOFStringArray(DCM_InstanceCreatorUID, 
-        PLM_UID_PREFIX);
+        PlmUidPrefix::getInstance().get().c_str());
     dataset->putAndInsertString (DCM_SOPClassUID, UID_RTStructureSetStorage);
     dcmtk_put (dataset, DCM_SOPInstanceUID, 
         d_ptr->rt_study_metadata->get_rtstruct_instance_uid());

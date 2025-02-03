@@ -70,7 +70,7 @@ public:
     /*! \brief Copy slice UIDs from referenced image into the Rtss object. */
     void apply_slice_list (const Slice_list *slice_list);
     void free_all_polylines (void);
-    void keyholize (void);
+    void keyholize (bool quiet = false);
     void set_rasterization_geometry (void);
     void set_geometry (const Plm_image_header *pih);
     void set_geometry (const Plm_image::Pointer& pli);

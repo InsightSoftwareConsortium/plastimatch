@@ -17,7 +17,8 @@ PLMBASE_API Rtss* cxt_load_ss_list (
 PLMBASE_API void cxt_load (
     Rtss *cxt,                  /* Output: load into this object */
     Rt_study_metadata *rsm,     /* Output: load into this object */
-    const char *cxt_fn          /* Input: file to load from */
+    const char *cxt_fn,         /* Input: file to load from */
+    bool quiet = false          /* Suppress stdout logging */
 );
 PLMBASE_API void cxt_save (
     Rtss *cxt,                             /* In: save this object */

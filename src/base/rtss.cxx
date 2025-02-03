@@ -562,11 +562,12 @@ Rtss::set_geometry (
 }
 
 void
-Rtss::keyholize (void)
+Rtss::keyholize (bool quiet)
 {
     /* Loop through structures */
     for (size_t i = 0; i < this->num_structures; i++) {
-        lprintf ("Keyholizing structure %d.\n", i);
+		if (!quiet)
+			lprintf ("Keyholizing structure %d.\n", i);
 	Rtss_roi *curr_structure = this->slist[i];
 
 	/* Find groups of contours which lie on the same slice */

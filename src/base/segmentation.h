@@ -32,7 +32,7 @@ public:
 
     void clear ();
     void load (const char *ss_img, const char *ss_list);
-    void load_cxt (const std::string& input_fn, Rt_study_metadata *rsm);
+    void load_cxt (const std::string& input_fn, Rt_study_metadata *rsm, bool quiet = false);
     void load_prefix (const char *prefix_dir);
     void load_prefix (const std::string& prefix_dir);
     void load_xio (const Xio_studyset& xio_studyset);
@@ -70,7 +70,7 @@ public:
     void cxt_extract (void);
     void cxt_re_extract (void);
     void prune_empty (void);
-    void keyholize ();
+    void keyholize (bool quiet = false);
     void rasterize (Plm_image_header *pih, bool want_labelmap, 
         bool xor_overlapping);
     void set_geometry (const Plm_image_header *pih);

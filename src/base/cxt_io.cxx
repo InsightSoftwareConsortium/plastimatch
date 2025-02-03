@@ -24,7 +24,8 @@ void
 cxt_load (
     Rtss *cxt,                       /* Output: load into this object */
     Rt_study_metadata *rsm,          /* Output: load into this object */
-    const char *cxt_fn               /* Input: file to load from */
+    const char *cxt_fn,              /* Input: file to load from */
+    bool quiet                       /* Suppress stdout logging */
 )
 {
     Rtss_contour* curr_contour;
@@ -61,7 +62,9 @@ cxt_load (
 	    val = string_trim (tag.substr (loc + 1));
 	    tag = tag.substr (0, loc);
 	}
-	printf ("%s|%s|\n", tag.c_str(), val.c_str());
+    if (!quiet) {
+	    printf ("%s|%s|\n", tag.c_str(), val.c_str());
+    }
 
 	if (tag == "ROI_NAMES") {
             break;
@@ -124,7 +127,9 @@ cxt_load (
     }
 
     /* Part 2: Structures info */
-    printf ("Starting structure parsing\n");
+    if (!quiet) {
+        printf ("Starting structure parsing\n");
+    }
     while (1) {
         std::string line, color, name;
 	int struct_id;
@@ -153,7 +158,9 @@ cxt_load (
     }
 
     /* Part 3: Contour info */
-    printf ("Starting contour parsing\n");
+    if (!quiet) {
+        printf ("Starting contour parsing\n");
+    }
     while (1) {
         int rc, k;
 	int num_pt = 0;

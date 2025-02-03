@@ -399,10 +399,10 @@ Rt_study::load_dose_mc (const char *dose_mc)
 }
 
 void 
-Rt_study::load_cxt (const char *input_fn)
+Rt_study::load_cxt (const char *input_fn, bool quiet)
 {
     d_ptr->m_seg = Segmentation::New ();
-    d_ptr->m_seg->load_cxt (input_fn, d_ptr->m_drs.get());
+    d_ptr->m_seg->load_cxt (input_fn, d_ptr->m_drs.get(), quiet);
 }
 
 void 

@@ -54,7 +54,7 @@ Dcmtk_module::set_general_series (
 {
     dataset->putAndInsertOFStringArray (DCM_Modality, modality);
     dataset->putAndInsertString (DCM_SeriesInstanceUID, 
-        dicom_uid(PLM_UID_PREFIX).c_str());
+        dicom_uid(PlmUidPrefix::getInstance().get().c_str()).c_str());
     dcmtk_copy_from_metadata (dataset, meta, DCM_SeriesNumber, 0);
     dcmtk_copy_from_metadata (dataset, meta, DCM_SeriesDate, 0);
     dcmtk_copy_from_metadata (dataset, meta, DCM_SeriesTime, 0);
@@ -106,7 +106,7 @@ Dcmtk_module::set_rt_series (
         in order to correctly make cross references between series.
         It is safe to set here, and allow caller to override. */
     dataset->putAndInsertString (DCM_SeriesInstanceUID, 
-        dicom_uid(PLM_UID_PREFIX).c_str());
+        dicom_uid(PlmUidPrefix::getInstance().get().c_str()).c_str());
     dcmtk_copy_from_metadata (dataset, meta, DCM_SeriesNumber, 0);
     dcmtk_copy_from_metadata (dataset, meta, DCM_SeriesDate, 0);
     dcmtk_copy_from_metadata (dataset, meta, DCM_SeriesTime, 0);

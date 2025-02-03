@@ -779,7 +779,7 @@ Dcmtk_rt_study::image_save (
             dsd.vol->origin[0] + dc[2] * k * dsd.vol->spacing[2],
             dsd.vol->origin[1] + dc[5] * k * dsd.vol->spacing[2],
             dsd.vol->origin[2] + dc[8] * k * dsd.vol->spacing[2]);
-        dcmtk_uid (dsd.slice_uid, PLM_UID_PREFIX);
+        dcmtk_uid (dsd.slice_uid, PlmUidPrefix::getInstance().get().c_str());
 
         dsd.slice_float = &((float*)dsd.vol->img)[k*dsd.slice_size];
 

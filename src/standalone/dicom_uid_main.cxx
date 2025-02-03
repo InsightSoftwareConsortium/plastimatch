@@ -20,7 +20,7 @@ int
 main (int argc, char* argv[])
 {
     char uid[100];
-    const char* uid_root = PLM_UID_PREFIX;
+    const char* uid_root = PlmUidPrefix::getInstance().get().c_str();
 
     if (argc == 2) {
 	uid_root = argv[1];

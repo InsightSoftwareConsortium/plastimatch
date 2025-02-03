@@ -278,7 +278,7 @@ Dcmtk_sro::save (
         rsm_fixed->get_ct_series_uid ());
     
     /* SOP Common Module */
-    std::string sro_sop_instance_uid = dicom_uid (PLM_UID_PREFIX);
+    std::string sro_sop_instance_uid = dicom_uid (PlmUidPrefix::getInstance().get().c_str());
     if (is_linear) {
         dataset->putAndInsertString (DCM_SOPClassUID, 
             UID_SpatialRegistrationStorage);

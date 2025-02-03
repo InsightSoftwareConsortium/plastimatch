@@ -58,7 +58,7 @@ public:
     void load_dcmtk (const char *dicom_dir); 
     void load_gdcm (const char *dicom_dir); 
 
-    void load_cxt (const char *input_fn);
+    void load_cxt (const char *input_fn, bool quiet = false);
     void load_prefix (const char *input_fn);
     void load_prefix (const std::string& input_fn);
 

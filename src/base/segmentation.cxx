@@ -327,10 +327,10 @@ Segmentation::add_rtss_roi (
 }
 
 void
-Segmentation::load_cxt (const std::string& input_fn, Rt_study_metadata *rsm)
+Segmentation::load_cxt (const std::string& input_fn, Rt_study_metadata *rsm, bool quiet)
 {
     d_ptr->m_rtss = Rtss::New();
-    cxt_load (d_ptr->m_rtss.get(), rsm, input_fn.c_str());
+    cxt_load (d_ptr->m_rtss.get(), rsm, input_fn.c_str(), quiet);
 
     d_ptr->m_rtss_valid = true;
     d_ptr->m_ss_img_valid = false;
@@ -784,10 +784,10 @@ Segmentation::prune_empty (void)
 }
 
 void
-Segmentation::keyholize ()
+Segmentation::keyholize (bool quiet)
 {
     if (d_ptr->m_rtss && d_ptr->m_rtss_valid) {
-        d_ptr->m_rtss->keyholize ();
+        d_ptr->m_rtss->keyholize (quiet);
     }
 }
 
